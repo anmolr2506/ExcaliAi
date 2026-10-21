@@ -128,7 +128,13 @@ export const config = {
   dataDir: process.env.DATA_DIR || path.resolve(__dirname, "../.data"),
 
   cors: {
-    origin: process.env.CORS_ORIGIN || "http://localhost:5173",
+    origin: (() => {
+      const val = process.env.CORS_ORIGIN?.trim();
+      if (!val) return "http://localhost:5173";
+      if (val === "*") return true;
+      if (val.includes(",")) return val.split(",").map((s) => s.trim()).filter(Boolean);
+      return val;
+    })(),
   },
 };
 

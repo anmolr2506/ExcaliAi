@@ -10,6 +10,10 @@
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
+    "build:server": "npm run db:generate && turbo run build --filter=@excaliai/server...",
+    "build:web": "turbo run build --filter=@excaliai/web",
+    "start": "npm run start -w apps/server",
+    "start:server": "npm run start -w apps/server",
     "dev:web": "npm run dev -w apps/web",
     "dev:server": "npm run dev -w apps/server",
     "dev:all": "turbo run dev --filter=@excaliai/web --filter=@excaliai/server",
